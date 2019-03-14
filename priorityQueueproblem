@@ -1,0 +1,95 @@
+package pepjan11;
+
+ import java.util.PriorityQueue;
+import java.util.Scanner;
+
+public class MyINTERNSHIP {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Scanner scn = new Scanner(System.in);
+		
+	  int n = scn.nextInt();
+	  while(n>0){
+		  String name = scn.next();
+		  Student st = new Student();
+		  if(name!="serve"){
+			
+			  st.name=name;
+			  st.cgpa=scn.nextInt();
+			  st.token=scn.nextInt();
+		  }else{
+			st.name=name;
+		  }
+		  studenthelp(st);
+		  n--;
+	  }
+		
+
+	}
+	
+	
+	
+
+	public static void studenthelp(Student st ){
+	     PriorityQueue<Student> pt = new PriorityQueue<>();
+	     if(st.name!="served"){
+	    	 pt.add(st);
+	     }else{
+	    	 pt.remove();
+	     }
+	}
+
+	
+	public static class Student implements Comparable<Student>{
+		String name ;
+		int cgpa;
+		int token;
+		Student(){
+			
+		}
+		
+		Student(String name , int cgpa, int token){
+			this.name=name;
+			this.cgpa=cgpa;
+			this.token= token;
+		}
+
+		@Override
+		public int compareTo(Student o) {
+			// TODO Auto-generated method stub
+			if(this.cgpa==o.cgpa){
+			     String  reterivevalue  = getvalue(this.name,o.name);
+			     if(reterivevalue ==this.name){
+			    	 return this.cgpa-o.cgpa;
+			     }else{
+			    	 return o.cgpa - this.cgpa;
+			     }
+			}else if(this.name==o.name){
+				return this.token-o.token;
+			}else{
+			return this.cgpa-o.cgpa;
+			}
+		}
+
+		private String getvalue(String name2, String name3) {
+			
+			while(name2.length()!=0 || name3.length()!=0){
+				if(name2.charAt(0)>name3.charAt(0))
+					return name2;
+				else{
+					if(name2.charAt(0)<name3.charAt(0))
+					return name3;
+					else{
+						name2=name2.substring(1);
+						name3 = name3.substring(1);
+					}
+				}
+				
+			}
+			return null;
+		
+		}
+	}
+}
